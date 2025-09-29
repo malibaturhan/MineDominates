@@ -9,10 +9,12 @@ public class PlayerController : MonoBehaviour, IControllable
 
     [Header("***Settings***")]
     [SerializeField]private float movementSpeed = 10;
+    [SerializeField]private float runSpeed = 30;
     [SerializeField]private float rotationSpeed = 10;
     [SerializeField]private Vector3 verticalMovement = Vector3.zero;
     [SerializeField] private float jumpHeight = 2f;
     [SerializeField] private float gravityForce = -10f;
+    [SerializeField] private bool isRunning = false;
 
     void Start()
     {
@@ -22,14 +24,8 @@ public class PlayerController : MonoBehaviour, IControllable
     private void InitializeComponents()
     {
         characterController = GetComponent<CharacterController>();
-        SubscribeInputs();
     }
 
-
-    private void SubscribeInputs()
-    {
-        PlayerInputManager.PlayerMovementInputEvent += ProcessMovement;
-    }
 
     public void ProcessMovement(Vector3 movementVector)
     {
@@ -47,7 +43,7 @@ public class PlayerController : MonoBehaviour, IControllable
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
 
-        Vector3 horizontalMove = move * movementSpeed;
+        Vector3 horizontalMove = move * (isRunning ? runSpeed : movementSpeed);
 
         if (IsGrounded && verticalMovement.y < 0)
         {
@@ -68,20 +64,10 @@ public class PlayerController : MonoBehaviour, IControllable
         }
     }
 
-    private void OnDestroy()
-    {
-        UnsubscribeInputs();
-    }
-
-    private void UnsubscribeInputs()
-    {
-        PlayerInputManager.PlayerMovementInputEvent -= ProcessMovement;
-    }
-
 
     public void OnJump()
     {
-
+        ProcessJump();
     }
 
     public void OnAction1()
@@ -92,6 +78,12 @@ public class PlayerController : MonoBehaviour, IControllable
     public void OnAction2()
     {
         
+    }
+
+    public void OnRun(bool v)
+    {
+        Debug.Log("Player controller on run triggered: " + v);
+        isRunning = v;
     }
 
     private bool IsGrounded => characterController.isGrounded;

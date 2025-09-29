@@ -30,4 +30,9 @@ public class PlayerAnimator : MonoBehaviour
             animator.SetFloat("MovementSpeed", movementVector.magnitude);
         }
     }
+
+    private void OnDestroy()
+    {
+        PlayerInputManager.PlayerMovementInputEvent += GetMovementVector;
+    }
 }

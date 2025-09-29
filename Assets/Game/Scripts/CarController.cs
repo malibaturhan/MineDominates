@@ -20,6 +20,10 @@ public class CarController : MonoBehaviour, IControllable
     {
         
     }
+    public void OnRun(bool v)
+    {
+        
+    }
 
 
 }

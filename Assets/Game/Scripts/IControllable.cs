@@ -7,5 +7,6 @@ public interface IControllable
     void OnJump();
     void OnAction1();
     void OnAction2();
+    void OnRun(bool value);
        
 }
