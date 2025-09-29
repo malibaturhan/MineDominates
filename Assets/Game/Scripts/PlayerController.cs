@@ -8,13 +8,20 @@ public class PlayerController : MonoBehaviour, IControllable
     [SerializeField] private Transform cameraTransform;
 
     [Header("***Settings***")]
-    [SerializeField]private float movementSpeed = 10;
-    [SerializeField]private float runSpeed = 30;
-    [SerializeField]private float rotationSpeed = 10;
-    [SerializeField]private Vector3 verticalMovement = Vector3.zero;
+    [SerializeField] private float movementSpeed = 10;
+    [SerializeField] private float runSpeed = 30;
+    [SerializeField] private float rotationSpeed = 10;
+    [SerializeField] private Vector3 verticalMovement = Vector3.zero;
     [SerializeField] private float jumpHeight = 2f;
     [SerializeField] private float gravityForce = -10f;
     [SerializeField] private bool isRunning = false;
+
+    [Header("***Animation Events***")]
+    [SerializeField] public Action<float> PlayerMovementMagnitudeAnimEvent;
+    [SerializeField] public Action PlayerJumpingAnimEvent;
+    [SerializeField] public Action<bool> PlayerRunningAnimEvent;
+    [SerializeField] public Action<bool> PlayerAimingAnimEvent;
+    [SerializeField] public Action<bool> PlayerUsingRemoteAnimEvent;
 
     void Start()
     {
@@ -34,13 +41,14 @@ public class PlayerController : MonoBehaviour, IControllable
         camForward.y = 0;
         camRight.y = 0;
 
-        Vector3 move = camForward.normalized * movementVector.z + 
+        Vector3 move = camForward.normalized * movementVector.z +
                         camRight.normalized * movementVector.x;
 
-        if(move.magnitude > 0.1f) 
+        if (move.magnitude > 0.1f)
         {
             Quaternion targetRotation = Quaternion.LookRotation(move);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
         }
 
         Vector3 horizontalMove = move * (isRunning ? runSpeed : movementSpeed);
@@ -52,6 +60,7 @@ public class PlayerController : MonoBehaviour, IControllable
         verticalMovement.y += gravityForce * Time.deltaTime;
 
         Vector3 finalMove = (horizontalMove + verticalMovement) * Time.deltaTime;
+        PlayerMovementMagnitudeAnimEvent?.Invoke(horizontalMove.magnitude);
         characterController.Move(finalMove);
     }
 
@@ -61,6 +70,7 @@ public class PlayerController : MonoBehaviour, IControllable
         {
             // zýplama hýzýný hesapla (fizik formülü: v = sqrt(2 * h * g))
             verticalMovement.y = Mathf.Sqrt(jumpHeight * -2f * gravityForce);
+            PlayerJumpingAnimEvent?.Invoke();
         }
     }
 
@@ -68,22 +78,27 @@ public class PlayerController : MonoBehaviour, IControllable
     public void OnJump()
     {
         ProcessJump();
+        OnRun(false);
     }
 
     public void OnAction1()
     {
-       
+
     }
 
     public void OnAction2()
     {
-        
+
     }
 
     public void OnRun(bool v)
     {
-        Debug.Log("Player controller on run triggered: " + v);
-        isRunning = v;
+        //Debug.Log("Player controller on run triggered: " + v);
+        if (IsGrounded)
+        {
+            isRunning = v;
+            PlayerRunningAnimEvent?.Invoke(v);
+        }
     }
 
     private bool IsGrounded => characterController.isGrounded;

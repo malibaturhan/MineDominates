@@ -4,35 +4,59 @@ using UnityEngine;
 public class PlayerAnimator : MonoBehaviour
 {
     [SerializeField] private Animator animator;
+    [SerializeField] private PlayerController playerController;
 
     [Header("***Settings***")]
     private Vector3 movementVector = Vector3.zero;
     void Start()
     {
-        PlayerInputManager.PlayerMovementInputEvent += GetMovementVector;
+        SubscribePlayerAnimEvents();
     }
 
-    private void GetMovementVector(Vector3 vector)
+    private void SubscribePlayerAnimEvents()
     {
-        movementVector = vector;
+        playerController.PlayerMovementMagnitudeAnimEvent += HandlePlayerMovement;
+        playerController.PlayerJumpingAnimEvent += HandleJump;
+        playerController.PlayerRunningAnimEvent += HandleRunning;
+        playerController.PlayerAimingAnimEvent += HandlePlayerAiming;
+        playerController.PlayerUsingRemoteAnimEvent += HandleRemoteUsing;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void HandleRemoteUsing(bool isRemoteUse)
     {
-        AnimateMovement();
+
     }
 
-    private void AnimateMovement()
+    private void HandlePlayerAiming(bool isAiming)
     {
-        if (movementVector.magnitude > 0) 
-        {
-            animator.SetFloat("MovementSpeed", movementVector.magnitude);
-        }
+
     }
+
+    private void HandleRunning(bool isRunning)
+    {
+        Debug.Log("RUN anim func trig " + isRunning);
+        animator.SetBool("isRunning", isRunning);
+    }
+
+    private void HandleJump()
+    {
+        // FIX FIX FIX FIX FIX FIX
+        //animator.SetBool("isRunning", isRunning);
+    }
+
+    private void HandlePlayerMovement(float moveMagnitude)
+    {
+        Debug.Log("movement anim func trig");
+        animator.SetFloat("MovementSpeed", moveMagnitude);
+    }
+
 
     private void OnDestroy()
     {
-        PlayerInputManager.PlayerMovementInputEvent += GetMovementVector;
+        playerController.PlayerMovementMagnitudeAnimEvent -= HandlePlayerMovement;
+        playerController.PlayerJumpingAnimEvent -= HandleJump;
+        playerController.PlayerRunningAnimEvent -= HandleRunning;
+        playerController.PlayerAimingAnimEvent -= HandlePlayerAiming;
+        playerController.PlayerUsingRemoteAnimEvent -= HandleRemoteUsing;
     }
 }

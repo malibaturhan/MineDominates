@@ -67,7 +67,7 @@ public class PlayerInputManager : MonoBehaviour
         {
             PlayerJumpEvent?.Invoke();
         }
-        if (Keyboard.current[runKey].wasPressedThisFrame)
+        if (Keyboard.current[runKey].isPressed)
         {
             PlayerRunEvent?.Invoke(true);
         }
