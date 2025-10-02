@@ -14,15 +14,16 @@ public abstract class Enemy : MonoBehaviour
 
     protected IEnemyState currentState;
 
-    private void Start()
+    private void Awake()
     {
         PlayerEventTransmitter.IsPlayerInScene += HandlePlayerExistence;
+        Debug.Log("subscribed player");
     }
 
     private void HandlePlayerExistence(bool isPlayerInScene, Transform _playerTransform)
     {
         playerTransform = _playerTransform;
-
+        Debug.Log("PLAYER TRANSFORM GRABBED");
     }
 
     void Update()

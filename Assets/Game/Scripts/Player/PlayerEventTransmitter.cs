@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerEventTransmitter : MonoBehaviour
 {
     public static Action<bool, Transform> IsPlayerInScene;
-    private void OnEnable()
+    private void Start()
     {
         IsPlayerInScene?.Invoke(true, this.transform);
     }

@@ -34,7 +34,7 @@ public class PlayerAnimator : MonoBehaviour
 
     private void HandleRunning(bool isRunning)
     {
-        Debug.Log("RUN anim func trig " + isRunning);
+        //Debug.Log("RUN anim func trig " + isRunning);
         animator.SetBool("isRunning", isRunning);
     }
 
