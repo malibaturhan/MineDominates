@@ -19,6 +19,8 @@ public class PlayerInputManager : MonoBehaviour
     public static Action PlayerInteractionEvent; // Corresponds "E" key
     public static Action PlayerSecondaryInteractionEvent; // Corresponds "Q" key
     public static Action<bool> ActivateCarEvent; // Corresponds "G" key
+    public static Action<bool> PlayerAimingEvent; // Corresponds MOUSE RIGHT
+    public static Action<bool> PlayerShootingEvent; // Corresponds MOUSE LEFT
 
     [Header("***Elements***")]
     [SerializeField] private PlayerAnimator playerAnimator;
@@ -42,6 +44,28 @@ public class PlayerInputManager : MonoBehaviour
     void Update()
     {
         GetMoveInputAndBroadcast();
+        GetMouseInputAndBroadcast();
+    }
+
+    private void GetMouseInputAndBroadcast()
+    {
+        if (Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            PlayerShootingEvent?.Invoke(true);
+            Debug.LogWarning("Player Shooting EVENT");
+        }
+        if (Mouse.current.leftButton.wasReleasedThisFrame)
+        {
+            PlayerShootingEvent?.Invoke(false);
+        }
+        if (Mouse.current.rightButton.wasPressedThisFrame)
+        {
+            PlayerAimingEvent?.Invoke(true);
+        }
+        if (Mouse.current.rightButton.wasReleasedThisFrame)
+        {
+            PlayerAimingEvent?.Invoke(false);
+        }
     }
 
     private void GetMoveInputAndBroadcast()
@@ -77,14 +101,14 @@ public class PlayerInputManager : MonoBehaviour
         }
         if (Keyboard.current[activateCarKey].wasPressedThisFrame)
         {
-            if (inputRouter.CurrentTarget == rcCar)
+            if ((object)inputRouter.CurrentTarget == rcCar)
             {
                 inputRouter.CurrentTarget = player;
                 SetActiveCamera(playerCam);
                 return;
             }
 
-            if (inputRouter.CurrentTarget == player)
+            if ((object)inputRouter.CurrentTarget == player)
             {
                 inputRouter.CurrentTarget = rcCar;
                 SetActiveCamera(rcCarCam);

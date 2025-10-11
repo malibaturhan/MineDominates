@@ -23,7 +23,7 @@ public abstract class Enemy : MonoBehaviour
     private void HandlePlayerExistence(bool isPlayerInScene, Transform _playerTransform)
     {
         playerTransform = _playerTransform;
-        Debug.Log("PLAYER TRANSFORM GRABBED");
+        //Debug.Log("PLAYER TRANSFORM GRABBED");
     }
 
     void Update()

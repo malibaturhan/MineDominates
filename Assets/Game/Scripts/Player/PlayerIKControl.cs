@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using UnityEngine;
 
@@ -16,10 +17,6 @@ public class PlayerIKControl : MonoBehaviour
 
     [SerializeField]private Animator Animator;
 
-    void Awake()
-    {
-        Animator = GetComponentInChildren<Animator>();
-    }
 
     private void OnAnimatorIK(int layerIndex)
     {
@@ -49,14 +46,6 @@ public class PlayerIKControl : MonoBehaviour
         }
     }
 
-    public void SetGunStyle(bool OneHanded)
-    {
-        Animator.SetBool("Is2HandedGun", !OneHanded);
-        Animator.SetBool("Is1HandedGun", OneHanded);
-    }
-
-
-
     public void Setup(Transform GunParent)
     {
         Transform[] allChildren = GunParent.GetComponentsInChildren<Transform>();
@@ -64,5 +53,12 @@ public class PlayerIKControl : MonoBehaviour
         RightElbowIKTarget = allChildren.FirstOrDefault(child => child.name == "RightElbow");
         LeftHandIKTarget = allChildren.FirstOrDefault(child => child.name == "LeftHand");
         RightHandIKTarget = allChildren.FirstOrDefault(child => child.name == "RightHand");
+    }
+
+    internal void SetGunHandling(bool is1Handed)
+    {
+        Animator.SetBool("Is1HandedGun", is1Handed);
+        Animator.SetBool("Is2HandedGun", !is1Handed);
+        Debug.Log("Gun handling set at IK controller 1handed: " + is1Handed);
     }
 }
