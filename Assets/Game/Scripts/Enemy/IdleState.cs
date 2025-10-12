@@ -10,10 +10,10 @@ public class IdleState : IEnemyState
 
     public void Update(Enemy enemy)
     {
-        //if (EnemyUtils.CheckPlayerDistance(playerTransform, enemyTransform, 10))
-        //{
-        //    enemy.ChangeState(new ChaseState());
-        //}
+        if (EnemyUtils.CheckPlayerDistance(enemy.PlayerTransform, enemy.transform, 10))
+        {
+            enemy.ChangeState(new ChaseState());
+        }
     }
 
     public void Exit(Enemy enemy)

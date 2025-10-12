@@ -10,7 +10,7 @@ public class InputRouter : MonoBehaviour
         set
         {
             _currentTarget = value;
-            Debug.Log(value);
+            //Debug.Log(value);
         }
     }
     private void OnEnable()

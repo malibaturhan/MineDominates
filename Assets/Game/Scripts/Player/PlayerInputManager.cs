@@ -52,7 +52,7 @@ public class PlayerInputManager : MonoBehaviour
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             PlayerShootingEvent?.Invoke(true);
-            Debug.LogWarning("Player Shooting EVENT");
+            //Debug.LogWarning("Player Shooting EVENT");
         }
         if (Mouse.current.leftButton.wasReleasedThisFrame)
         {

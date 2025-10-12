@@ -11,7 +11,11 @@ public class GunControl : MonoBehaviour
     private bool isShooting;
 
     [Header("***Elements***")]
+    [SerializeField] private Transform muzzleTransform;
+
+    [Header("***Components***")]
     [SerializeField] private AudioSource gunAudioSource;
+    [SerializeField] private GameObject bulletPrefab;
 
     [Header("***Settings***")]
     [SerializeField] private float fireRate = 4f;
@@ -57,9 +61,11 @@ public class GunControl : MonoBehaviour
 
     private void TryShoot()
     {
-        //Debug.LogWarning("GUN SHOOTS");
         gunAudioSource.Play();
-
+        var bullet = Instantiate(bulletPrefab);
+        bullet.transform.position = muzzleTransform.position;
+        bullet.transform.localRotation = Quaternion.Euler(90f, 0f, 0f);
+        bullet.transform.forward = muzzleTransform.forward;
     }
 
     private void HandleAiming()

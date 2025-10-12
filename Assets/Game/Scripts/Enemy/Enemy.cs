@@ -10,9 +10,11 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] private float attackRange = 2f;
 
     [Header("***Settings***")]
-    [SerializeField] private Transform? playerTransform;
+    [SerializeField] public Transform? PlayerTransform;
 
-    protected IEnemyState currentState;
+    [SerializeField] private IEnemyState currentState;
+    public IEnemyState CurrentState => currentState;
+    public int Health => health;
 
     private void Awake()
     {
@@ -22,7 +24,7 @@ public abstract class Enemy : MonoBehaviour
 
     private void HandlePlayerExistence(bool isPlayerInScene, Transform _playerTransform)
     {
-        playerTransform = _playerTransform;
+        PlayerTransform = _playerTransform;
         //Debug.Log("PLAYER TRANSFORM GRABBED");
     }
 
@@ -52,6 +54,7 @@ public abstract class Enemy : MonoBehaviour
 
     public virtual void TakeDamage(int amount)
     {
+        Debug.Log("I took damage");
         health -= amount;
         if (health <= 0)
             Die();
