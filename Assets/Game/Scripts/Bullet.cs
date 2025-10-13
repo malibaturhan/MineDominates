@@ -27,7 +27,7 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Bullet hit " + collision.gameObject.name);
+        //Debug.Log("Bullet hit " + collision.gameObject.name);
         trailRenderer.enabled = false;
         if (collision.gameObject.CompareTag("Enemy"))
         {

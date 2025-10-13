@@ -7,6 +7,7 @@ public static class EnemyUtils
                                            float distance)
     {
         float currentDistance = Vector3.Magnitude(playerTransform.position - enemyTransform.position);
+        //Debug.Log("current Distance " +currentDistance);
         return currentDistance < distance;
     } 
 }

@@ -5,18 +5,32 @@ public class ChaseState : IEnemyState
 {
     public void Enter(Enemy enemy)
     {
-        
+        //Debug.Log($"{enemy.gameObject.name} entered Chase state");
+        SetAnimatorParameters(enemy);
+    }
+    public void SetAnimatorParameters(Enemy enemy)
+    {
+        enemy.animationController.SetAttacking(false);
+        enemy.animationController.SetMovementSpeed(enemy.navigator.Velocity);
     }
     public void Update(Enemy enemy)
     {
-        //if (EnemyUtils.CheckPlayerDistance())
-        //{
-        //    enemy.ChangeState(new AttackState());
-        //}
+        if(enemy.PlayerTransform is null)
+        {
+            return;
+        }
+        if (EnemyUtils.CheckPlayerDistance(enemy.PlayerTransform, enemy.transform, enemy.attackRange))
+        {
+            enemy.ChangeState(new AttackState());
+        }
+        else
+        {
+            enemy.navigator.SetTarget(enemy.PlayerTransform);
+        }
     }
     public void Exit(Enemy enemy)
     {
-        
+
     }
 
 

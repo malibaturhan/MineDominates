@@ -5,9 +5,10 @@ using UnityEngine;
 public class PlayerEventTransmitter : MonoBehaviour
 {
     public static Action<bool, Transform> IsPlayerInScene;
-    private void Start()
+    private void Awake()
     {
-        StartCoroutine("InvokePlayerExistence");        
+        IsPlayerInScene?.Invoke(true, transform);
+        //StartCoroutine("InvokePlayerExistence");
     }
 
     IEnumerator InvokePlayerExistence()

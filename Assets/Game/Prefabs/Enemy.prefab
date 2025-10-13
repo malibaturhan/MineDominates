@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   debugText: {fileID: 4485634850680821873}
-  enemy: {fileID: 7804763094158880469}
+  enemy: {fileID: 3309258551274564395}
   hpImage: {fileID: 5523239962999581699}
 --- !u!1 &3995194014857097986
 GameObject:
@@ -217,10 +217,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2559195445699941828}
-  - component: {fileID: 7804763094158880469}
   - component: {fileID: 4670678438899220523}
   - component: {fileID: 6102090773300069534}
   - component: {fileID: 3309258551274564395}
+  - component: {fileID: 4035515150335916286}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -241,28 +241,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3780766236892348416}
+  - {fileID: 3789628532847412084}
   - {fileID: 2590825030850717198}
   - {fileID: 5213424726635564374}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7804763094158880469
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4207118214379502505}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9948a17df77554749aced3179e21bf3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
-  speed: 3
-  detectionRange: 10
-  attackRange: 2
-  PlayerTransform: {fileID: 0}
 --- !u!136 &4670678438899220523
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -278,7 +261,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -307,7 +290,7 @@ NavMeshAgent:
   m_Height: 1.79
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 2
 --- !u!114 &3309258551274564395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,10 +304,56 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BodyguardEnemy
   health: 100
-  speed: 3
   detectionRange: 10
   attackRange: 2
-  PlayerTransform: {fileID: 0}
+  PlayerTransform: {fileID: 2559195445699941828}
+  navigator: {fileID: 0}
+  animationController: {fileID: 9114325226943981992}
+--- !u!114 &4035515150335916286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4207118214379502505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8a23f05c229ad04d8d6ba9d815f6154, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyNavigator
+  agent: {fileID: 6102090773300069534}
+--- !u!1 &5409164161184356999
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3789628532847412084}
+  m_Layer: 0
+  m_Name: ModelPivotFix
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3789628532847412084
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5409164161184356999}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3780766236892348416}
+  m_Father: {fileID: 2559195445699941828}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5523131251474056384
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,6 +442,7 @@ GameObject:
   - component: {fileID: 1935835764189761885}
   - component: {fileID: 8977356622671597653}
   - component: {fileID: 1222079313359680741}
+  - component: {fileID: 1108948917495210256}
   m_Layer: 2
   m_Name: DetectVolume
   m_TagString: Untagged
@@ -524,7 +554,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 854f325ccde0f74478992ba6ba2da26a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DetectVolume
-  detectingEnemy: {fileID: 0}
+  detectingEnemy: {fileID: 3309258551274564395}
+--- !u!54 &1108948917495210256
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7334570582820886719}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &9199150553130746834
 GameObject:
   m_ObjectHideFlags: 0
@@ -667,7 +724,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 2559195445699941828}
+    m_TransformParent: {fileID: 3789628532847412084}
     m_Modifications:
     - target: {fileID: 100154, guid: bdd7a03fd93bf2d4cb6babd63ceabee8, type: 3}
       propertyPath: m_Name
@@ -679,11 +736,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400154, guid: bdd7a03fd93bf2d4cb6babd63ceabee8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.047669
+      value: -1.0476694
       objectReference: {fileID: 0}
     - target: {fileID: 400154, guid: bdd7a03fd93bf2d4cb6babd63ceabee8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.002
       objectReference: {fileID: 0}
     - target: {fileID: 400154, guid: bdd7a03fd93bf2d4cb6babd63ceabee8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -691,15 +748,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400154, guid: bdd7a03fd93bf2d4cb6babd63ceabee8, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 400154, guid: bdd7a03fd93bf2d4cb6babd63ceabee8, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 400154, guid: bdd7a03fd93bf2d4cb6babd63ceabee8, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 400154, guid: bdd7a03fd93bf2d4cb6babd63ceabee8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -729,6 +786,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 9114325226943981992}
   m_SourcePrefab: {fileID: 100100000, guid: bdd7a03fd93bf2d4cb6babd63ceabee8, type: 3}
+--- !u!95 &3780766236885167738 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9500000, guid: bdd7a03fd93bf2d4cb6babd63ceabee8, type: 3}
+  m_PrefabInstance: {fileID: 3780766236892486426}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3780766236892348416 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400154, guid: bdd7a03fd93bf2d4cb6babd63ceabee8, type: 3}
@@ -751,3 +813,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 969bd5b262eeead49867d547fbd4a2fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAnimationController
+  animator: {fileID: 3780766236885167738}

@@ -12,17 +12,19 @@ public class EnemyAnimationController : MonoBehaviour
 
     public void SetDead()
     {
+        Debug.LogWarning("SET DEAD ANIMATION PARAM USED");
         animator.SetBool("IsDead", true);
     }
 
     public void SetAttacking(bool isAttacking)
     {
+        Debug.LogWarning("SET ATTACKING ANIMATION PARAM USED");
         animator.SetBool("IsAttacking", isAttacking);
     }
 
-    public void SetMovementSpeed(Vector3 movementVector)
+    public void SetMovementSpeed(float movementSpeed)
     {
-        var movementSpeed = movementVector.magnitude;
+        Debug.LogWarning("SET MOVEMENT ANIMATION PARAM USED");
         animator.SetFloat("MovementSpeed", movementSpeed);
     }
 
