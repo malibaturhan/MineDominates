@@ -1,8 +1,13 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
+
+    public static Action<GameManager> LinkGameManager;
+    public static Action<GameStateEnums> TransmitGameState;
+
     [Header("SINGLETON INSTANCE")]
     public static GameManager Instance { get; private set; }
 
@@ -10,7 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameStateEnums _gameState;
     private void Awake()
     {
-        if(Instance is not null && Instance == this.gameObject)
+        if(Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
@@ -20,16 +25,27 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+        
     }
     void Start()
     {
-        GameRuns();
+        _gameState = GameStateEnums.MAINMENU;
+        TransmitGameManager();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void TransmitGameManager()
     {
-        
+        LinkGameManager?.Invoke(Instance);
+    }
+
+    public void SetGameState(GameStateEnums newState)
+    {
+        _gameState = newState;
+        TransmitGameState?.Invoke(_gameState);
+    }
+    public GameStateEnums GetGameState()
+    {
+        return _gameState;
     }
 
     private void GameRuns()

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -5,6 +6,8 @@ using UnityEngine.Audio;
 public class MusicManager : MonoBehaviour
 {
     public static MusicManager Instance { get; private set; }
+
+    [SerializeField] private GameManager gameManager;
 
     [Header("***Components***")]
     [SerializeField] private AudioMixer mixer;
@@ -29,7 +32,62 @@ public class MusicManager : MonoBehaviour
     }
     void Start()
     {
+        musicSource = GetComponent<AudioSource>();
         musicSource.loop = true;
+        SubscribeEvents();
+        if(gameManager == null)
+        {
+            gameManager = FindFirstObjectByType<GameManager>();
+            SubscribeEvents();
+        }
+        CheckGameStateThenPlayMusic();
+    }
+
+    private void CheckGameStateThenPlayMusic()
+    {
+        if(gameManager.GetGameState() == GameStateEnums.MAINMENU)
+        {
+            PlayMusic(mainMenuMusic);
+            SetHighPass(100f);
+            SetLowPass(4000f);
+        }
+        if(gameManager.GetGameState() == GameStateEnums.PLAYING)
+        {
+            PlayMusic(gameMusic);
+            SetHighPass(10f);
+            SetLowPass(6000f);
+        }
+        if(gameManager.GetGameState() == GameStateEnums.PAUSED)
+        {
+            PlayMusic(gameMusic);
+            SetHighPass(10f);
+            SetLowPass(800f);
+        }
+    }
+
+    private void SubscribeEvents()
+    {
+        GameManager.LinkGameManager += GetGameManager;
+        GameManager.TransmitGameState += RefreshGameMusic;
+    }
+
+    private void RefreshGameMusic(GameStateEnums enums)
+    {
+        CheckGameStateThenPlayMusic();
+    }
+
+    private void OnDestroy()
+    {
+        UnsubscribeEvents();
+    }
+
+    private void UnsubscribeEvents()
+    {
+        GameManager.LinkGameManager -= GetGameManager;
+    }
+    private void GetGameManager(GameManager manager)
+    {
+        gameManager = manager;
     }
 
     private void PlayMusic(AudioClip clip)
