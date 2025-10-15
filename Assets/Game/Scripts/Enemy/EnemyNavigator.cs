@@ -24,7 +24,7 @@ public class EnemyNavigator : MonoBehaviour
     void FixedUpdate()
     {
         Velocity = agent.velocity.magnitude;
-        Debug.Log(Velocity);
+        //Debug.Log(Velocity);
         RotateTowardsMovementDirection();
     }
 

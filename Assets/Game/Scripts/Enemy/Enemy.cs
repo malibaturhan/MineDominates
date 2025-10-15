@@ -19,10 +19,13 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] private IEnemyState currentState;
     public IEnemyState CurrentState => currentState;
     public int Health => health;
+    private bool isDead = false;
 
+  
     private void Awake()
     {
         SetupNavigator();
+        Debug.Log($"////////[{name}] subscribing to PlayerEventTransmitter ({GetInstanceID()})");
         PlayerEventTransmitter.IsPlayerInScene += HandlePlayerExistence;
         ChangeState(new IdleState());
         //Debug.Log("subscribed player");
@@ -35,6 +38,7 @@ public abstract class Enemy : MonoBehaviour
 
     private void Start()
     {
+        
         if (PlayerTransform is null) 
         {
             var p = FindFirstObjectByType<PlayerController>();
@@ -43,6 +47,8 @@ public abstract class Enemy : MonoBehaviour
     }
     private void HandlePlayerExistence(bool isPlayerInScene, Transform _playerTransform)
     {
+        PlayerTransform = _playerTransform;
+        Debug.Log($"***[{name}] Player Transform assigned: {_playerTransform.position}");
         PlayerTransform = _playerTransform;
         //Debug.Log("PLAYER TRANSFORM GRABBED");
     }
@@ -53,6 +59,11 @@ public abstract class Enemy : MonoBehaviour
         {
             currentState.Update(this);
         }
+        if (PlayerTransform == null)
+            Debug.LogError($"[{name}] PlayerTransform is NULL!");
+
+        if (PlayerTransform != null && Vector3.Distance(PlayerTransform.position, transform.position) == 0)
+            Debug.LogWarning($"[{name}] PlayerTransform same position as EnemyTransform!");
     }
 
     public void ChangeState(IEnemyState newState)
@@ -73,11 +84,17 @@ public abstract class Enemy : MonoBehaviour
 
     public virtual void TakeDamage(int amount)
     {
-        Debug.LogWarning("TAKE DAMAGE ON ENEMY triggered chase");
-        ChangeState(new ChaseState());
-        health -= amount;
-        if (health <= 0)
-            Die();
+        if (!isDead)
+        {
+            Debug.LogWarning("TAKE DAMAGE ON ENEMY triggered chase");
+            ChangeState(new ChaseState());
+            health -= amount;
+            if (health <= 0)
+            {
+                Die();
+                isDead = true;
+            }
+        }
     }
 
     protected virtual void Die()

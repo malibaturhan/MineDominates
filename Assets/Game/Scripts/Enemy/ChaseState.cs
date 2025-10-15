@@ -21,6 +21,7 @@ public class ChaseState : IEnemyState
         }
         if (EnemyUtils.CheckPlayerDistance(enemy.PlayerTransform, enemy.transform, enemy.attackRange))
         {
+            Debug.Log("Chase state triggered attack");
             enemy.ChangeState(new AttackState());
         }
         else

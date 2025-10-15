@@ -3,7 +3,24 @@ using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [Header("SINGLETON INSTANCE")]
+    public static GameManager Instance { get; private set; }
+
+    [Header("***Elements***")]
+    [SerializeField] private GameStateEnums _gameState;
+    private void Awake()
+    {
+        if(Instance is not null && Instance == this.gameObject)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
     void Start()
     {
         GameRuns();

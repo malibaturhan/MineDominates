@@ -22,7 +22,7 @@ public class IdleState : IEnemyState
         }
         if (EnemyUtils.CheckPlayerDistance(enemy.PlayerTransform, enemy.transform, enemy.detectionRange))
         {
-            //Debug.LogWarning("IDLE triggered chase");
+            Debug.LogWarning("IDLE triggered chase");
             enemy.ChangeState(new ChaseState());
         }
     }
