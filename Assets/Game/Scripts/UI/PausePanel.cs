@@ -44,21 +44,26 @@ public class PausePanel : MonoBehaviour
         if (gameState == GameStateEnums.PLAYING) 
         {
             pauseCanvasGroup.gameObject.SetActive(false);
-            FadePanel(0f);
+            Time.timeScale = 1f;
+            StartCoroutine(FadePanel(0f));
         }
         if (gameState == GameStateEnums.PAUSED) 
         {
             pauseCanvasGroup.gameObject.SetActive(true);
-            FadePanel(1f);
+            Time.timeScale = 0f;
+            StartCoroutine(FadePanel(1f));
         }
     }
 
     private IEnumerator FadePanel(float targetAlpha)
     {
         var t = 0f;
+        var startAlpha = pauseCanvasGroup.alpha;    
         while (t < fadeDuration) 
         {
-            pauseCanvasGroup.alpha = Mathf.Lerp(pauseCanvasGroup.alpha, targetAlpha, t / fadeDuration);
+            var aimAlpha = Mathf.Lerp(startAlpha, targetAlpha, t / fadeDuration); 
+            pauseCanvasGroup.alpha = aimAlpha;
+            t += Time.unscaledDeltaTime;
             yield return null;
         }
         pauseCanvasGroup.alpha = targetAlpha;

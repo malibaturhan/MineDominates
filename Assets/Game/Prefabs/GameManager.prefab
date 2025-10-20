@@ -372,9 +372,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 4752993867830170264}
         m_TargetAssemblyTypeName: MainMenuUIController, Assembly-CSharp
-        m_MethodName: OnPlayClicked
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -395,6 +395,8 @@ GameObject:
   - component: {fileID: 7151157592026008298}
   - component: {fileID: 8376245645166055237}
   - component: {fileID: 2754055485762276433}
+  - component: {fileID: 564954089033882424}
+  - component: {fileID: 5300942739370988388}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -443,6 +445,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13c7878b5c339bb4b887fd393570752d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PausePanel
+  pauseCanvasGroup: {fileID: 5141170277036754949}
+  fadeDuration: 0.5
+  gameManager: {fileID: 0}
+--- !u!114 &564954089033882424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4752993867830170264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f000f954e6175f4d987c6e9c641bb42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GeneralInteractionHandler
+  gameManager: {fileID: 0}
+  pauseKey: 60
+--- !u!114 &5300942739370988388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4752993867830170264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21900b8e5d85ffc4080b99da8461246b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PauseMenuActions
+  gameManager: {fileID: 0}
 --- !u!1 &5729373720466392754
 GameObject:
   m_ObjectHideFlags: 0

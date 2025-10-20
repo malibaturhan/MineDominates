@@ -45,23 +45,27 @@ public class MusicManager : MonoBehaviour
 
     private void CheckGameStateThenPlayMusic()
     {
+        
         if(gameManager.GetGameState() == GameStateEnums.MAINMENU)
         {
+            Debug.LogWarning("MUSIC MANAGER MAIN MENU");
             PlayMusic(mainMenuMusic);
-            SetHighPass(100f);
-            SetLowPass(4000f);
+            SetHighPass(10f);
+            SetLowPass(22000f);
         }
         if(gameManager.GetGameState() == GameStateEnums.PLAYING)
         {
+            Debug.LogWarning("MUSIC MANAGER PLAYING");
             PlayMusic(gameMusic);
             SetHighPass(10f);
-            SetLowPass(6000f);
+            SetLowPass(22000f);
         }
         if(gameManager.GetGameState() == GameStateEnums.PAUSED)
         {
+            Debug.LogWarning("MUSIC MANAGER PAUSED");
             PlayMusic(gameMusic);
             SetHighPass(10f);
-            SetLowPass(800f);
+            SetLowPass(400f);
         }
     }
 

@@ -6,10 +6,31 @@ public class GeneralInteractionHandler : MonoBehaviour
     [SerializeField] private GameManager gameManager;
 
     [Header("***General Keys***")]
-    [SerializeField] private Key interactionKey = Key.Escape;
+    [SerializeField] private Key pauseKey = Key.Escape;
     void Start()
     {
         SubscribeEvents();
+    }
+
+    private void Update()
+    {
+        if (Keyboard.current == null)
+        {
+            Debug.LogWarning("Keyboard.current is NULL!");
+            return;
+        }
+
+        if (Keyboard.current[pauseKey].wasPressedThisFrame)
+        {
+            if (gameManager.GetGameState() == GameStateEnums.PLAYING)
+            {
+                gameManager.SetGameState(GameStateEnums.PAUSED);
+            }
+            if (gameManager.GetGameState() == GameStateEnums.PAUSED)
+            {
+                gameManager.SetGameState(GameStateEnums.PLAYING);
+            }
+        }
     }
 
     private void OnDisable()
@@ -31,6 +52,7 @@ public class GeneralInteractionHandler : MonoBehaviour
     {
         GameManager.LinkGameManager -= GetGameManager;
     }
-    
+
+
 
 }
