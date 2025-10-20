@@ -33,7 +33,7 @@ public class EnemyAnimationController : MonoBehaviour
 
     public void SetMovementSpeed(float movementSpeed)
     {
-        //Debug.LogWarning("SET MOVEMENT ANIMATION PARAM USED");
+        Debug.LogWarning($"ANIMATION MOVEMENT SPEED {movementSpeed}");
         animator.SetFloat("MovementSpeed", movementSpeed);
         if (movementSpeed < 0.1f)
         {

@@ -48,8 +48,7 @@ public abstract class Enemy : MonoBehaviour
     private void HandlePlayerExistence(bool isPlayerInScene, Transform _playerTransform)
     {
         PlayerTransform = _playerTransform;
-        Debug.Log($"***[{name}] Player Transform assigned: {_playerTransform.position}");
-        PlayerTransform = _playerTransform;
+        //Debug.Log($"***[{name}] Player Transform assigned: {_playerTransform.position}");
         //Debug.Log("PLAYER TRANSFORM GRABBED");
     }
 
@@ -59,11 +58,11 @@ public abstract class Enemy : MonoBehaviour
         {
             currentState.Update(this);
         }
-        if (PlayerTransform == null)
-            Debug.LogError($"[{name}] PlayerTransform is NULL!");
+        //if (PlayerTransform == null)
+        //    Debug.LogError($"[{name}] PlayerTransform is NULL!");
 
-        if (PlayerTransform != null && Vector3.Distance(PlayerTransform.position, transform.position) == 0)
-            Debug.LogWarning($"[{name}] PlayerTransform same position as EnemyTransform!");
+        //if (PlayerTransform != null && Vector3.Distance(PlayerTransform.position, transform.position) == 0)
+        //    Debug.LogWarning($"[{name}] PlayerTransform same position as EnemyTransform!");
     }
 
     public void ChangeState(IEnemyState newState)
