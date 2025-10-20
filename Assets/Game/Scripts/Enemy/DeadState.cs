@@ -4,7 +4,7 @@ public class DeadState : IEnemyState
 {
     public void Enter(Enemy enemy)
     {
-        //Debug.Log($"{enemy.gameObject.name} entered dead state");
+        Debug.LogWarning($"{enemy.gameObject.name} entered dead state");
         SetAnimatorParameters(enemy);
         enemy.navigator.SetTarget(enemy.transform);
         GameObject.Destroy(enemy.gameObject, 2f); // 2 sn sonra yok et

@@ -12,8 +12,8 @@ public class DetectVolume : MonoBehaviour
         //Debug.Log($"Detected something");
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.LogWarning("VOLUME triggered chase");
-            Debug.Log($"{gameObject.name} detected player");
+            //Debug.LogWarning("VOLUME triggered chase");
+            //Debug.Log($"{gameObject.name} detected player");
             detectingEnemy.ChangeState(new ChaseState());
         }
     }

@@ -24,16 +24,20 @@ public class EnemyAnimationController : MonoBehaviour
         if (isAttacking)
         {
             animator.SetTrigger("AttackTrigger");
+            animator.SetLayerWeight(1, 1f);
+            Debug.LogWarning("++++Attack TRIGGERED");
         }
         else
         {
             animator.ResetTrigger("AttackTrigger");
+            animator.SetLayerWeight(1, 0f);
+            Debug.LogWarning("----Attack RESET");
         }
     }
 
     public void SetMovementSpeed(float movementSpeed)
     {
-        Debug.LogWarning($"ANIMATION MOVEMENT SPEED {movementSpeed}");
+        //Debug.LogWarning($"ANIMATION MOVEMENT SPEED {movementSpeed}");
         animator.SetFloat("MovementSpeed", movementSpeed);
         if (movementSpeed < 0.1f)
         {

@@ -18,6 +18,7 @@ public abstract class Enemy : MonoBehaviour
 
     [SerializeField] private IEnemyState currentState;
     public IEnemyState CurrentState => currentState;
+    public Action<IEnemyState> OnStateChange;
     public int Health => health;
     private bool isDead = false;
 
@@ -77,6 +78,7 @@ public abstract class Enemy : MonoBehaviour
         if (currentState != null) 
         {
             currentState.Enter(this);
+            OnStateChange?.Invoke(newState);
         }
 
     }
