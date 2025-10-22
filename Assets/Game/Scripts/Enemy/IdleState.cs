@@ -7,6 +7,7 @@ public class IdleState : IEnemyState
     {
         //Debug.Log($"{enemy.gameObject.name} entered idle state");
         SetAnimatorParameters(enemy);
+        enemy.navigator.SetSpeed(0f);
 
     }
     public void SetAnimatorParameters(Enemy enemy)

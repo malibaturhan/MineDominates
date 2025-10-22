@@ -20,6 +20,11 @@ public class EnemyNavigator : MonoBehaviour
         agent.SetDestination(playerTransform.position);
     }
 
+    public void SetSpeed(float speed) 
+    {
+        agent.speed = speed;
+    }
+
 
     void FixedUpdate()
     {

@@ -25,13 +25,13 @@ public class EnemyAnimationController : MonoBehaviour
         {
             animator.SetTrigger("AttackTrigger");
             animator.SetLayerWeight(1, 1f);
-            Debug.LogWarning("++++Attack TRIGGERED");
+            //Debug.LogWarning("++++Attack TRIGGERED");
         }
         else
         {
             animator.ResetTrigger("AttackTrigger");
             animator.SetLayerWeight(1, 0f);
-            Debug.LogWarning("----Attack RESET");
+            //Debug.LogWarning("----Attack RESET");
         }
     }
 

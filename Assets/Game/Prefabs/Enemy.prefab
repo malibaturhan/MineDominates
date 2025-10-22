@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 280719849522552017}
   - component: {fileID: 6520382852965674124}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: EnemyCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -282,10 +282,10 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.2
   m_Speed: 7
-  m_Acceleration: 8
+  m_Acceleration: 50
   avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_AngularSpeed: 360
+  m_StoppingDistance: 0.2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -307,7 +307,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BodyguardEnemy
   health: 100
   detectionRange: 5
-  attackRange: 0.5
+  chaseSpeed: 6
+  attackWalkSpeed: 3
+  attackRange: 0.7
   PlayerTransform: {fileID: 0}
   navigator: {fileID: 0}
   animationController: {fileID: 9114325226943981992}
@@ -338,6 +340,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b0e76aa0066ec043bf41b404d3b6d39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAudioBehaviour
+  deathCry: {fileID: 0}
+  walkSound: {fileID: 0}
+  audioSource: {fileID: 0}
+  enemy: {fileID: 0}
 --- !u!82 &3714039949413275802
 AudioSource:
   m_ObjectHideFlags: 0
@@ -902,6 +908,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100154, guid: bdd7a03fd93bf2d4cb6babd63ceabee8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 9114325226943981992}
+    - targetCorrespondingSourceObject: {fileID: 100154, guid: bdd7a03fd93bf2d4cb6babd63ceabee8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1800457250449486991}
   m_SourcePrefab: {fileID: 100100000, guid: bdd7a03fd93bf2d4cb6babd63ceabee8, type: 3}
 --- !u!95 &3780766236885167738 stripped
 Animator:
@@ -931,3 +940,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAnimationController
   animator: {fileID: 3780766236885167738}
+--- !u!114 &1800457250449486991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3780766236892584992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a04a811631f712c44867d0eb16bc14a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAnimAttackHandler
+  enemy: {fileID: 0}
+  playerHealth: {fileID: 0}

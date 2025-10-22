@@ -7,6 +7,7 @@ public class ChaseState : IEnemyState
     {
         //Debug.Log($"{enemy.gameObject.name} entered Chase state");
         SetAnimatorParameters(enemy);
+        enemy.navigator.SetSpeed(enemy.chaseSpeed);
     }
     public void SetAnimatorParameters(Enemy enemy)
     {

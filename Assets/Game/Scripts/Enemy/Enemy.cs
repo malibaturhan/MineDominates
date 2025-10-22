@@ -7,12 +7,13 @@ public abstract class Enemy : MonoBehaviour
     [Header("***Settings***")]
     [SerializeField] private int health = 100;
     [SerializeField] public float detectionRange = 10f;
+    [SerializeField] public float chaseSpeed = 6f;
+    [SerializeField] public float attackWalkSpeed = 4.5f;
     public float attackRange = 2f;
-
-    [Header("***Settings***")]
-    [SerializeField] public Transform? PlayerTransform;
+    public float attackPower = 5f;
 
     [Header("***Elements***")]
+    [SerializeField] public Transform? PlayerTransform;
     [HideInInspector]public EnemyNavigator navigator;
     public EnemyAnimationController animationController;
 
@@ -22,7 +23,6 @@ public abstract class Enemy : MonoBehaviour
     public int Health => health;
     private bool isDead = false;
 
-  
     private void Awake()
     {
         SetupNavigator();

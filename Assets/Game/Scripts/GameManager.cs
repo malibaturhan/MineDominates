@@ -41,19 +41,27 @@ public class GameManager : MonoBehaviour
     public void SetGameState(GameStateEnums newState)
     {
         _gameState = newState;
-        TransmitGameState?.Invoke(_gameState);
+        if (GameStateEnums.MAINMENU == newState || GameStateEnums.PAUSED == newState) 
+        {
+            EnableMouse();
+        }
+        else
+        {
+            DisableMouse();
+        }
+            TransmitGameState?.Invoke(_gameState);
     }
     public GameStateEnums GetGameState()
     {
         return _gameState;
     }
 
-    private void GameRuns()
+    private void DisableMouse()
     {
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    private void MenuActive()
+    private void EnableMouse()
     {
         Cursor.lockState = CursorLockMode.None;
     }
