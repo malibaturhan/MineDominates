@@ -29,7 +29,7 @@ public class PlayerShooting : MonoBehaviour
 
     private void HandleAiming(bool isAiming)
     {
-        if (isAiming) 
+        if (isAiming)
         {
             SetGunVisibility(true);
             playerIKControl.HandIKAmount = 1;
@@ -49,37 +49,6 @@ public class PlayerShooting : MonoBehaviour
         gunTransform.gameObject.SetActive(isGunVisible);
     }
 
-    //private void HandleShooting(bool isShooting)
-    //{
-    //    if (currentlyAiming && isShooting)
-    //    {
-    //        TryShoot();
-    //    }
-    //    else
-    //    {
-    //        return;
-    //    }
-    //}
-
-    //private void TryShoot()
-    //{
-    //    if (canShoot)
-    //    {
-    //        PlayShootingSound();
-    //    }
-    //    RaycastHit hit;
-    //    if(Physics.Raycast(transform.position, aimTarget.position, out hit))
-    //    {
-
-    //    }
-    //}
-
-    //private void PlayShootingSound()
-    //{
-    //    Debug.Log("Gun shooting sound!!!!!!!!!!!!!!");
-    //}
-
-
     // Update is called once per frame
     void Update()
     {
@@ -89,15 +58,10 @@ public class PlayerShooting : MonoBehaviour
 
     private void PlaceAim(Vector3 aimPosition)
     {
-        RaycastHit raycastHit;
-        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out raycastHit, int.MaxValue, aimLayerMask))
-        {
-            aimTarget.position = raycastHit.point;
-        }
-        else
-        {
-            return;
-        }
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.5f));
+
+        aimTarget.position = gunTransform.position + ray.direction * 30;
+
     }
 
     private Vector3 GetForwardDirection(Transform targetTransform)
@@ -112,7 +76,7 @@ public class PlayerShooting : MonoBehaviour
 
     private void UnsubscribeEvents()
     {
-        PlayerInputManager.PlayerAimingEvent   -= HandleAiming;
+        PlayerInputManager.PlayerAimingEvent -= HandleAiming;
         //PlayerInputManager.PlayerShootingEvent -= HandleShooting;
     }
 }
