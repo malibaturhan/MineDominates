@@ -2,7 +2,7 @@
 
 A third-person shooter prototype where I prioritized building a complete gameplay loop first (even if some parts were rough), then improving structure and polish from there. The project is a practical learning sandbox — focused on real systems, real problems, and real iteration 🙂.
 
-**Itch.io:** [ITCH LINK WILL BE HERE]
+**Itch.io:** [[ITCH LINK WILL BE HERE]](https://malibaturhan.itch.io/mine-dominates)
 
 ---
 
