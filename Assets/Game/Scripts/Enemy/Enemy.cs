@@ -45,6 +45,7 @@ public abstract class Enemy : MonoBehaviour
             var p = FindFirstObjectByType<PlayerController>();
             PlayerTransform = p.transform;
         }
+        LevelManager.Instance.AddEnemy(this);
     }
     private void HandlePlayerExistence(bool isPlayerInScene, Transform _playerTransform)
     {
@@ -100,6 +101,7 @@ public abstract class Enemy : MonoBehaviour
 
     protected virtual void Die()
     {
+        LevelManager.Instance.RemoveEnemy(this);
         ChangeState(new DeadState());
         // burada animasyon, loot, destroy vs. tetiklenir
     }

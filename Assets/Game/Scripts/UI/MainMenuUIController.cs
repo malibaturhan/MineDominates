@@ -16,7 +16,13 @@ public class MainMenuUIController : MonoBehaviour
     private void OnEnable()
     {
         SubscribeEvents();
+
+        if (gameManager == null)
+        {
+            gameManager = GameManager.Instance;
+        }
     }
+
 
     private void SubscribeEvents()
     {

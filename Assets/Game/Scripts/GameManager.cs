@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameStateEnums _gameState;
     private void Awake()
     {
-        if(Instance != null && Instance != this)
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        
+
     }
     void Start()
     {
@@ -41,15 +41,16 @@ public class GameManager : MonoBehaviour
     public void SetGameState(GameStateEnums newState)
     {
         _gameState = newState;
-        if (GameStateEnums.MAINMENU == newState || GameStateEnums.PAUSED == newState) 
+        TransmitGameState?.Invoke(_gameState);
+        if (GameStateEnums.MAINMENU == newState || GameStateEnums.PAUSED == newState || GameStateEnums.GAMEOVER == newState)
         {
             EnableMouse();
         }
         else
         {
             DisableMouse();
+            Debug.LogWarning("MOUSE DISABLED");
         }
-            TransmitGameState?.Invoke(_gameState);
     }
     public GameStateEnums GetGameState()
     {

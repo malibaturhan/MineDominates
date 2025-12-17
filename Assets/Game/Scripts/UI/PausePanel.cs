@@ -33,8 +33,9 @@ public class PausePanel : MonoBehaviour
     private void UnsubscribeEvents()
     {
         GameManager.LinkGameManager -= GetGameManager;
-        GameManager.TransmitGameState += HandlePause;
+        GameManager.TransmitGameState -= HandlePause;
     }
+
     private void HandlePause(GameStateEnums gameState)
     {
         if (gameState == GameStateEnums.MAINMENU) 
@@ -44,6 +45,12 @@ public class PausePanel : MonoBehaviour
         if (gameState == GameStateEnums.PLAYING) 
         {
             pauseCanvasGroup.gameObject.SetActive(false);
+            Time.timeScale = 1f;
+            StartCoroutine(FadePanel(0f));
+        }
+        if (gameState == GameStateEnums.GAMEOVER) 
+        {
+            //pauseCanvasGroup.gameObject.SetActive(false);
             Time.timeScale = 1f;
             StartCoroutine(FadePanel(0f));
         }

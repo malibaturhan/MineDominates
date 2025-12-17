@@ -19,12 +19,29 @@ public class PlayerHealth : MonoBehaviour
     public void TakeHit(float damageValue)
     {
         currentHealth -= damageValue;
+        CheckIfDie();
         UpdateUI();
+    }
+
+    private void CheckIfDie()
+    {
+        if(currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        GameManager.Instance.SetGameState(GameStateEnums.GAMEOVER);
     }
 
     private void UpdateUI()
     {
-        var fillAmount = currentHealth / baseHealth;
-        healthBar.fillAmount = fillAmount;
+        if (healthBar != null)
+        {
+            var fillAmount = currentHealth / baseHealth;
+            healthBar.fillAmount = fillAmount;
+        }
     }
 }
