@@ -52,9 +52,9 @@ public class SceneLoader : MonoBehaviour
             {
                 progressBar.value = progress;
             }
-            if (asyncOp.progress >= 0.9f)
+            if (asyncOp.progress >= 0.8f)
             {
-                yield return new WaitForSeconds(0.4f);
+                yield return new WaitForSecondsRealtime(0.4f);
                 asyncOp.allowSceneActivation = true;
             }
 

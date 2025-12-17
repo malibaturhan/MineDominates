@@ -26,7 +26,7 @@ public abstract class Enemy : MonoBehaviour
     private void Awake()
     {
         SetupNavigator();
-        Debug.Log($"////////[{name}] subscribing to PlayerEventTransmitter ({GetInstanceID()})");
+        //Debug.Log($"////////[{name}] subscribing to PlayerEventTransmitter ({GetInstanceID()})");
         PlayerEventTransmitter.IsPlayerInScene += HandlePlayerExistence;
         ChangeState(new IdleState());
         //Debug.Log("subscribed player");
@@ -109,5 +109,6 @@ public abstract class Enemy : MonoBehaviour
     private void OnDisable()
     {
         PlayerEventTransmitter.IsPlayerInScene -= HandlePlayerExistence;
+        LevelManager.Instance.RemoveEnemy(this);
     }
 }

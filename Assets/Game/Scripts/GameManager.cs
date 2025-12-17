@@ -40,6 +40,8 @@ public class GameManager : MonoBehaviour
 
     public void SetGameState(GameStateEnums newState)
     {
+
+        Debug.LogWarning("Game state changed to: " +newState);
         _gameState = newState;
         TransmitGameState?.Invoke(_gameState);
         if (GameStateEnums.MAINMENU == newState || GameStateEnums.PAUSED == newState || GameStateEnums.GAMEOVER == newState)

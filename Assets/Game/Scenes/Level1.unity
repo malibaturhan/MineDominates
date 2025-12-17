@@ -5873,6 +5873,7 @@ GameObject:
   - component: {fileID: 1567682161}
   - component: {fileID: 1567682163}
   - component: {fileID: 1567682162}
+  - component: {fileID: 1567682164}
   m_Layer: 5
   m_Name: Win
   m_TagString: Untagged
@@ -5998,6 +5999,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1567682160}
   m_CullTransparentMesh: 1
+--- !u!114 &1567682164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1567682160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59e505b02dec44d4c97d6194f89f1ee8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1591155711
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7500,6 +7513,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   winPanel: {fileID: 1567682160}
+  enemies: []
 --- !u!1001 &1972098394
 PrefabInstance:
   m_ObjectHideFlags: 0

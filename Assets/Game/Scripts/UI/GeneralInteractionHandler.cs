@@ -22,11 +22,13 @@ public class GeneralInteractionHandler : MonoBehaviour
 
         if (Keyboard.current[pauseKey].wasPressedThisFrame)
         {
+
+            Debug.LogWarning("Escape key pressed");
             if (gameManager.GetGameState() == GameStateEnums.PLAYING)
             {
                 gameManager.SetGameState(GameStateEnums.PAUSED);
             }
-            if (gameManager.GetGameState() == GameStateEnums.PAUSED)
+            else if (gameManager.GetGameState() == GameStateEnums.PAUSED)
             {
                 gameManager.SetGameState(GameStateEnums.PLAYING);
             }

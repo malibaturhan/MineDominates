@@ -32,7 +32,7 @@ public class GameOverPanel : MonoBehaviour
     private void UnsubscribeEvents()
     {
         GameManager.LinkGameManager -= GetGameManager;
-        GameManager.TransmitGameState += HandlePause;
+        GameManager.TransmitGameState -= HandlePause;
     }
     private void HandlePause(GameStateEnums gameState)
     {
